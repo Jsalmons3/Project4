@@ -18,6 +18,14 @@ class MyApp(ShowBase):
         self.Spacestation = spaceJamClasses.SpaceStation(self.loader, "./Assets/Space Station/SpaceStation1B/spaceStation.x", self.render, "Space Station", "./Assets/Space Station/SpaceStation1B/SpaceStation1_Dif2.png", (6000, 1000, 67), 200)
         self.Ship = spaceJamClasses.Spaceship(self.loader, "./Assets/Spaceships/Dumbledore/Dumbledore.x", self.render, "Ship", "./Assets/Spaceships/Dumbledore/spacejet_C.png", Vec3(0, 0, 100), 50)
 
+        self.cTrav = CollisionTraverser()
+        self.cTrav.traverse(self.render)
+        self.pusher = CollisionHandlerPusher()
+        self.pusher.addCollider(self.Ship.collisionNode, self.Ship.modelNode)
+        self.cTrav.addCollider(self.Ship.collisionNode, self.pusher)
+        self.cTrav.showCollisions(self.render)
+
+
         fullCycle = 60
 
         for j in range(fullCycle):
