@@ -11,3 +11,11 @@ class PlacedObject(PandaNode):
 
         self.modelNode.reparentTo(parentNode)
         self.modelNode.setName(nodeName)
+
+class CollidableObject(PlacedObject):
+    # Now, we relate our PlacedObject to collisions by using it as a helper class for this function to create collisions.
+    def __init__(self, loader: Loader, modelPath: str, parentNode: NodePath, nodeName: str):
+        super(CollidableObject, self).__init__(loader, modelPath, parentNode, nodeName)
+        # Every single type of collider will get the "_cNode" tag behind it to signify that it's a collidable object.
+        self.collisionNode = self.modelNode.attachNewNode(CollisionNode(nodeName + '_cNode'))
+        #self.collisionNode.show()
